@@ -1,0 +1,17 @@
+[project]
+name = "cygnus"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.12",
+    "scikit-learn>=1.6.1",
+    "torch>=2.6.0",
+    "uvicorn[standard]>=0.34.2",
+]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+]

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anomaly Detection Live</title>
+    <style>
+        #plot {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Live Anomaly Detection</h1>
+    <div id="plot"></div>
+
+    <script>
+        const ws = new WebSocket("ws://localhost:8000/ws");
+    
+        let xData = [];
+        let yData = [];
+        let labels = [];
+    
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+    
+            xData.push(data.x);
+            yData.push(data.y);
+            labels.push(data.label);
+    
+            if (xData.length > 100) {
+                xData.shift();
+                yData.shift();
+                labels.shift();
+            }
+    
+            updatePlot();
+        };
+    
+        function updatePlot() {
+            const total = xData.length;
+    
+            // Use exponential decay for opacity (more granular fading)
+            const opacities = xData.map((_, i) => {
+                const age = total - i;
+                return Math.pow(age / total, 2); // slower fade
+            });
+    
+            const trace = {
+                x: xData,
+                y: yData,
+                mode: 'markers',
+                type: 'scatter',
+                marker: {
+                    color: labels.map(l => l === 1 ? 'red' : 'blue'),
+                    opacity: opacities,
+                    size: 10
+                }
+            };
+    
+            Plotly.newPlot('plot', [trace], {
+                title: 'Anomaly Detection (latest 100 points)',
+                xaxis: { title: 'X' },
+                yaxis: { title: 'Y' }
+            });
+        }
+    </script>
+    
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</body>
+</html>
