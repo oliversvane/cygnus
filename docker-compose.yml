@@ -1,0 +1,78 @@
+services:
+  timescaledb:
+    image: timescaledev/timescaledb:latest-pg14
+    container_name: timescaledb
+    environment:
+      POSTGRES_USER: ts_user
+      POSTGRES_PASSWORD: ts_pass
+      POSTGRES_DB: ts_db
+    volumes:
+      - ts_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  mqtt:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt
+    volumes:
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_conf:/mosquitto/config
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      MINIO_ROOT_USER: minio_user
+      MINIO_ROOT_PASSWORD: minio_pass
+    command: server /data
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fastapi
+    depends_on:
+      - timescaledb
+      - mqtt
+      - minio
+    env_file:
+      - .env.backend
+    environment:
+      DATABASE_URL: postgres://ts_user:ts_pass@timescaledb:5432/ts_db
+      MQTT_BROKER: mqtt
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minio_user
+      MINIO_SECRET_KEY: minio_pass
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: react
+    depends_on:
+      - backend
+    env_file:
+      - .env.frontend
+    environment:
+      REACT_APP_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+
+volumes:
+  ts_data:
+  mosquitto_data:
+  mosquitto_conf:
+  minio_data:
+
+networks:
+  default:
+    driver: bridge

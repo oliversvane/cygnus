@@ -1,0 +1,26 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: csu-test
+servers: 1
+agents: 1
+ports:
+  - port: "8080:80"       # HTTP ingress → frontend
+    nodeFilters:
+      - loadbalancer
+  - port: "1883:1883"     # MQTT
+    nodeFilters:
+      - agent:0
+  - port: "5432:5432"     # TimescaleDB
+    nodeFilters:
+      - agent:0
+volumes:
+  - volume: /tmp/k3d-csu-data:/data
+    nodeFilters:
+      - all
+options:
+  k3s:
+    extraArgs:
+      - arg: "--disable=traefik"
+        nodeFilters:
+          - server:*
