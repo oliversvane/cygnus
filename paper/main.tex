@@ -1,0 +1,61 @@
+\documentclass[10pt,twocolumn]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{authblk}
+\usepackage{abstract}
+
+% Title and author
+\title{Your Paper Title Here}
+\author[1]{Oliver Svane Olsen}
+\author[2]{Daniel Rohrer Hansen}
+\affil[1]{Co-Engineering Aps\\ \texttt{olol@coec.dk}}
+\affil[2]{Co-Engineering Aps\\ \texttt{daha@coec.dk}}
+
+\date{}
+
+\begin{document}
+
+\twocolumn[
+\maketitle
+\begin{onecolabstract}
+\noindent
+\textbf{Abstract:}  
+Write your abstract here. Summarize your work in about 150-250 words.
+\end{onecolabstract}
+\vspace{1cm}
+]
+
+\section{Introduction}
+Introduce the problem, motivation, and background. Include references if needed.
+
+\section{Related Work}
+Summarize previous research relevant to your topic.
+
+\section{Methodology}
+Describe your methods, models, or algorithms in detail.
+
+\section{Data}
+For the diarization models in this work, three datasets were used. The CHiME-6 Challenge dataset focuses on distant multi-microphone conversational speech in natural home environments, recorded during dinner parties, and provides a challenging scenario for unsegmented multispeaker speech recognition with open-source baselines \cite{watanabe2020chime}. The AMI Meeting Corpus contains 100 hours of multi-modal meeting recordings from both scenario-driven design team meetings and naturally occurring meetings, annotated with orthographic transcriptions and rich phenomena, all released under a Creative Commons Attribution 4.0 license \cite{carletta2006ami}. Lastly, VoxConverse is an audio-visual diarization dataset extracted from YouTube videos, offering multispeaker clips with detailed speaker diarisation annotations, useful for real-world diarization tasks \cite{chung2020spot}.
+
+\section{Experiments}
+Explain experimental setup, datasets, evaluation metrics, and results.
+
+\section{Discussion}
+Interpret results, analyze strengths and limitations.
+
+\section{Conclusion}
+Summarize findings and suggest future work.
+
+\section*{Acknowledgments}
+(optional) Thank collaborators, funding sources, etc.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

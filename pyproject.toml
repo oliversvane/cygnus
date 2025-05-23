@@ -1,0 +1,29 @@
+[project]
+name = "cygnus"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cython>=3.1.0",
+    "jupyter>=1.1.1",
+    "lightning>=2.5.1.post0",
+    "requests>=2.32.3",
+    "rich>=14.0.0",
+    "torch>=2.7.0",
+    "torchaudio>=2.7.0",
+    "torchvision>=0.22.0",
+    "tqdm>=4.67.1",
+    "transformers>=4.51.3",
+]
+
+[dependency-groups]
+development = [
+    "black>=25.1.0",
+    "tensorboard>=2.19.0",
+    "torch-tb-profiler>=0.4.3",
+]
+audioset = [
+    "tqdm>=4.67.1",
+    "yt-dlp>=2025.4.30",
+]

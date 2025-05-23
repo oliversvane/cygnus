@@ -1,6 +1,4 @@
-
-# pixi environments
-.pixi
-*.egg-info
-# magic environments
-.magic
+data/
+.venv
+lightning_logs/
+*__pycache__

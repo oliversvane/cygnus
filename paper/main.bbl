@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{carletta2006ami}
+J.~Carletta.
+\newblock Announcing the ami meeting corpus.
+\newblock {\em The ELRA Newsletter}, 11(1):3--5, January--March 2006.
+
+\bibitem{chung2020spot}
+Joon~Son Chung, Jaesung Huh, Arsha Nagrani, Triantafyllos Afouras, and Andrew Zisserman.
+\newblock Spot the conversation: speaker diarisation in the wild.
+\newblock In {\em Interspeech}, 2020.
+
+\bibitem{watanabe2020chime}
+Shinji Watanabe, Michael Mandel, Jon Barker, Emmanuel Vincent, Ashish Arora, Xuankai Chang, Sanjeev Khudanpur, Vimal Manohar, Daniel Povey, Desh Raj, et~al.
+\newblock Chime-6 challenge: Tackling multispeaker speech recognition for unsegmented recordings.
+\newblock In {\em CHiME 2020-6th International Workshop on Speech Processing in Everyday Environments}, 2020.
+
+\end{thebibliography}
